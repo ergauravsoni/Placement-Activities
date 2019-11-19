@@ -1,0 +1,64 @@
+{% extends "pmt_act/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+	{% if detail.valid == True %}
+		<h2 class='animated 1 fadeInUp delay-1s' style="color: rgb(26, 0, 10);"><b>Training/Workshop: {{ detail.name }}</b></h2>
+	{% endif %}
+{% endblock header %}
+
+{% block content %}
+	{% if detail.valid == True %}
+	
+		<h2 class='animated 1 fadeIn delay-2s' style="color: rgb(255, 102, 0);">Details:</h2>
+		<div class="panel panel-default animated 1 fadeIn delay-2s">
+			<div class="panel-heading animated 1 fadeIn delay-2s">
+				<h3 class='animated 1 fadeIn delay-3s' style="color: rgb(255, 255, 77);">
+					Date Added: {{ detail.date_added|date:'M d Y, H:i' }}
+					<small>
+						{% if user == detail.owner %}
+							{% buttons %}
+								<a href="{% url 'pmt_act:edit_tw' detail.id %}">
+									<button type="button" class="btn btn-primary animated 1 bounceIn delay-3s">EDIT</button>
+								</a>
+								<a href="{% url 'pmt_act:delete_tw' detail.id %}">
+									<button type="button" class="btn btn-primary animated 1 bounceIn delay-3s">DELETE</button>
+								</a>
+							{% endbuttons %}
+						{% endif %}
+					</small>
+				</h3>
+			</div>
+			<div class="panel-body animated 1 flipInX delay-3s">
+				<img src='/assets/{{ detail.banner }}' width='300vw' height='200vh' align="right">
+				Registration Begins: {{ detail.registration_Begins|date:'M d Y, H:i' }}</br>
+				Registration Ends: {{ detail.registration_Ends|date:'M d Y, H:i' }}</br>
+				Event Begins: {{ detail.event_Begins|date:'M d Y, H:i' }}</br>
+				Event Fee: {{ detail.event_Fee }}/-</br>
+				Event URL: <a href={{ detail.event_URL }}>{{ detail.event_URL }}</a></br>
+				Additional Details: {{ detail.additional_Details }}</br>
+				Contact Name: {{ detail.contact_Name }}</br>
+				Contact E-Mail: {{ detail.contact_Email }}</br>
+				Contact No.: {{ detail.contact_No }}</br>
+				 Document: <a href='/assets/{{ detail.document }}'>
+					{% if detail.document %}
+						Click to download
+					{% endif %}
+				</a>
+				
+			</div>
+		</div>
+		
+		
+		<form action="{% url 'pmt_act:enroll_tw' detail.id %}" method='post' class="form animated 1 fadeIn delay-2s" enctype="multipart/form-data">
+			
+			{% csrf_token %}
+		
+				{% buttons %}
+					<button type='submit' name="enroll" class="btn btn-primary animated 1 bounceIn delay-3s">{{ enroll_tw.user_id_id }}ENROLL</button>
+				{% endbuttons %}
+				
+		</form>
+		
+	{% endif %}
+{% endblock content %}

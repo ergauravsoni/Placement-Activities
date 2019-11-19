@@ -1,0 +1,47 @@
+{% extends "pmt_act/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+	{% if tw.valid == True %}	
+		<h2 class='animated infinite flash delay-0s' style='color:rgb(0, 230, 0)'><b>CONFIRMATION!!<b></h2>
+	{% endif %}	
+{% endblock header %}
+
+{% block content %}
+	{% if tw.valid == True %}
+	
+		{% if enroll_tw.user_id.id == user.id and enroll_tw.enrolled == True %}
+
+			<h3 class='animated 1 fadeIn delay-1s' style="color: rgb(26, 0, 10);"><b>{{ user }}, you are already enrolled for Training/Workshop: {{ tw.name }}</b></h3>
+			
+			<form action="{% url 'pmt_act:enroll_tw' tw.id %}" method='post' class="form animated 1 fadeIn delay-2s" enctype="multipart/form-data">
+			
+			{% csrf_token %}
+			
+			{% buttons %}
+				<button type='submit' name="goBack" class="btn btn-primary animated 1 bounceIn delay-2s">Go Back To Trainings/Workshops</button>
+
+			{% endbuttons %}
+			
+			</form>
+			
+		{% else %}
+		
+			<h3 class='animated 1 fadeIn delay-1s' style="color: rgb(26, 0, 10);"><b>{{ user }}, confirm your enrollment for Training/Workshop: {{ tw.name }}</b></h3>
+			
+			<form action="{% url 'pmt_act:enroll_tw' tw.id %}" method='post' class="form animated 1 fadeIn delay-2s" enctype="multipart/form-data">
+			
+			{% csrf_token %}
+			
+			{% buttons %}
+				<button type='submit' name="confirmEn" class="btn btn-primary animated 1 bounceIn delay-2s">Confirm</button>
+				<button type='submit' name="cancelEn" class="btn btn-primary animated 1 bounceIn delay-2s">Cancel</button>
+			{% endbuttons %}
+			
+			</form>
+		
+		{% endif %}
+	
+	{% endif %}
+{% endblock content %}
+	

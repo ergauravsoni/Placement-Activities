@@ -1,0 +1,44 @@
+{% extends "pmt_act/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+	<div class='jumbotron animated 1 fadeIn delay-1s' style='opacity:0.6'>
+		<h1 class='animated 1 fadeInUp delay-1s'>GET YOUR DREAM JOB.</h1>
+		<img class="myImages animated 1 fadeIn delay-0s" src='/assets/img/img-slide-1.jpg'style="width:100%;height:50vh;">
+		<img class="myImages animated 1 fadeIn delay-0s" src='/assets/img/img-slide-2.jpg' style="width:100%;height:50vh;">
+		<img class="myImages animated 1 fadeIn delay-0s" src='/assets/img/img-slide-3.jpg' style="width:100%;height:50vh;">
+		<script>
+			var myIndex = 0;
+
+			function carousel() {
+				var i;
+				var x = document.getElementsByClassName("myImages");
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display ="none";  
+				}
+				myIndex++;
+				if (myIndex > x.length) {myIndex = 1}    
+				x[myIndex-1].style.display = "block";  
+				setTimeout(carousel, 2500);    
+			}
+			
+			carousel();
+		</script>
+	</div>
+{% endblock header %}
+
+{% block content %}
+	<h2 class='animated 1 fadeIn delay-2s'>
+		{% if user.is_authenticated %}
+			{{ user }},
+		{% else %}
+			<a href="{% url 'users:register' %}">Register Yourself</a> to
+		{% endif %}
+		get the latest updates
+		about the placement activities so that you don't miss any opportunities
+		and climb your way up for your dream job.
+	</h2>
+	<h2 class='animated 1 fadeIn delay-3s'>Share your knowledge of placement related events with others and
+	rise up together for building a bright career. 
+	Remember knowlegde always grows through sharing! </h2>
+{% endblock content %}

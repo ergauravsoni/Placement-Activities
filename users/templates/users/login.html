@@ -1,0 +1,24 @@
+{% extends "pmt_act/base.html" %}
+{% load bootstrap3 %}
+
+{%  block header %}
+    <h2 class='animated 1 fadeInUp delay-1s'>Log in to your account.</h2>
+{% endblock header %}
+
+{% block content %}
+
+  <form method="post" action="{% url 'users:login' %}" class="form animated 1 fadeIn delay-2s">
+	
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    
+		{% buttons %}
+			<button name="submit" class="btn btn-primary animated 1 bounceIn delay-3s">Log In</button>
+    {% endbuttons %}    
+    
+		<input type="hidden" name="next"
+      value="{% url 'pmt_act:index' %}" />
+  
+	</form>
+  
+{% endblock content %}

@@ -1,0 +1,73 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Placement Activities</title>
+		
+		{% bootstrap_css %}
+		{% bootstrap_javascript %}
+	  
+		<link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<link href="/assets/css/style1.css" rel="stylesheet">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+		<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+		<script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+		<script>			
+			$(function () {
+				$('.datetime-input').datetimepicker({
+					format:'YYYY-MM-DD HH:mm:ss'
+				});
+			});
+		</script>
+	</head>
+	
+	<body class="img-bg">
+		
+		<!-- Static navbar -->
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container">
+			
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar"
+						aria-expanded="false" aria-controls="navbar">
+					</button>
+					<a class="navbar-brand" href="{% url 'pmt_act:index' %}">Placement Activities</a>
+				</div>
+				
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav text1">
+						<li><a href="{% url 'pmt_act:trainings_workshops' %}">Trainings/Workshops</a></li>
+					</ul>
+					
+					<ul class="nav navbar-nav navbar-right">
+						{% if user.is_authenticated %}
+							<li><a>Hello, {{ user.username }}.</a></li>
+							<li><a href="{% url 'users:logout' %}">Log Out</a></li>
+						{% else %}
+							<li><a href="{% url 'users:register' %}">Register</a></li>
+							<li><a href="{% url 'users:login' %}">Log In</a></li>
+						{% endif %}
+					</ul>
+				</div><!--/.nav-collapse -->
+				
+			</div>
+		</nav>
+		
+		<div class="container">
+		
+			<div class="page-header">
+				{% block header %}{% endblock header %}
+			</div>
+			<div>
+				{% block content %}{% endblock content %}
+			</div>
+			
+		</div><!-- /container -->
+	</body>
+</html>

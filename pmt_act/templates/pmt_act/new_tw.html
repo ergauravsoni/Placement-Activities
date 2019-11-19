@@ -1,0 +1,20 @@
+{% extends "pmt_act/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+	<h2 class='animated 1 fadeInUp delay-1s'>Add a new Training/Workshop:</h2>
+{% endblock header %}
+
+{% block content %}
+				
+	<form action="{% url 'pmt_act:new_tw' %}" method='post' class="form animated 1 fadeIn delay-2s" enctype="multipart/form-data">
+		
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		
+		{% buttons %}
+			<button name="submit" class="btn btn-primary animated 1 bounceIn delay-3s">Add Training/Workshop</button>
+		{% endbuttons %}
+	</form>
+	
+{% endblock content %}

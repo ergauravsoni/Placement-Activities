@@ -1,0 +1,35 @@
+{% extends "pmt_act/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+	<h2 class='animated 1 fadeInUp delay-1s'>Trainings/Workshops</h2>
+{% endblock header %}
+
+{% block content %}
+	
+	<div class="panel panel-default animated 1 fadeIn delay-2s">
+		{% for training_workshop in trainings_workshops %}
+			{% if training_workshop.valid == True %}
+				<div class="panel-heading animated 1 fadeIn delay-2s">
+					<a href="{% url 'pmt_act:training_workshop' training_workshop.id %}">
+						<h3>
+							{{ training_workshop }} 
+						</h3>
+					</a>
+				</div>
+				</br>
+			{% endif %}
+		{% empty %}
+			<h3 class='animated 1 fadeIn delay-2s'>No training/workshop have been added yet.</h3>
+		{% endfor %}
+	</div>
+	
+	<h3>
+		<a href="{% url 'pmt_act:new_tw' %}">
+			{% buttons %}
+				<button type="button" class="btn btn-primary animated 1 bounceIn delay-3s">Add New Training/Workshop</button>
+			{% endbuttons %}
+		</a>
+	</h3>
+
+{% endblock content %}

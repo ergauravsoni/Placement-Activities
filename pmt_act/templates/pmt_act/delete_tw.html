@@ -1,0 +1,25 @@
+{% extends "pmt_act/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+	{% if tw.valid == True %}
+		<h2 class='animated infinite flash delay-0s' style='color:rgb(230, 0, 0)'><b>WARNING!!<b></h2>
+	{% endif %}
+{% endblock header %}
+
+{% block content %}
+	{% if tw.valid == True %}
+		<h3 class='animated 1 fadeIn delay-1s' style="color: rgb(26, 0, 10);"><b>Are you sure you want to delete Training/Workshop: {{ tw.name }}</b>?</h3>
+		
+		<form action="{% url 'pmt_act:delete_tw' tw.id %}" method='post' class="form animated 1 fadeIn delay-2s" enctype="multipart/form-data">
+		
+		{% csrf_token %}
+		
+		{% buttons %}
+			<button type='submit' name="confirm" class="btn btn-primary animated 1 bounceIn delay-2s">Confirm</button>
+			<button type='submit' name="cancel" class="btn btn-primary animated 1 bounceIn delay-2s">Cancel</button>
+		{% endbuttons %}
+		
+		</form>
+	{% endif %}
+{% endblock content %}
