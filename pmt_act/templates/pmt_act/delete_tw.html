@@ -9,7 +9,7 @@
 
 {% block content %}
 	{% if tw.valid == True %}
-		<h3 class='animated 1 fadeIn delay-1s' style="color: rgb(26, 0, 10);"><b>Are you sure you want to delete Training/Workshop: {{ tw.name }}</b>?</h3>
+		<h3 class='animated 1 fadeIn delay-1s'><b>Are you sure you want to delete Training/Workshop: {{ tw.name }}</b>?</h3>
 		
 		<form action="{% url 'pmt_act:delete_tw' tw.id %}" method='post' class="form animated 1 fadeIn delay-2s" enctype="multipart/form-data">
 		

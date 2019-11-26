@@ -12,7 +12,7 @@
 	
 		{% if enroll_tw.user_id.id == user.id and enroll_tw.enrolled == True %}
 
-			<h3 class='animated 1 fadeIn delay-1s' style="color: rgb(26, 0, 10);"><b>{{ user }}, you are already enrolled for Training/Workshop: {{ tw.name }}</b></h3>
+			<h3 class='animated 1 fadeIn delay-1s'><b>{{ user }}, you are already enrolled for Training/Workshop: {{ tw.name }}</b></h3>
 			
 			<form action="{% url 'pmt_act:enroll_tw' tw.id %}" method='post' class="form animated 1 fadeIn delay-2s" enctype="multipart/form-data">
 			
@@ -27,7 +27,7 @@
 			
 		{% else %}
 		
-			<h3 class='animated 1 fadeIn delay-1s' style="color: rgb(26, 0, 10);"><b>{{ user }}, confirm your enrollment for Training/Workshop: {{ tw.name }}</b></h3>
+			<h3 class='animated 1 fadeIn delay-1s'><b>{{ user }}, confirm your enrollment for Training/Workshop: {{ tw.name }}</b></h3>
 			
 			<form action="{% url 'pmt_act:enroll_tw' tw.id %}" method='post' class="form animated 1 fadeIn delay-2s" enctype="multipart/form-data">
 			

@@ -42,7 +42,7 @@ class Enroll_TW(models.Model):
         null=False,unique=False)
     user_id = models.ForeignKey(User,on_delete=models.CASCADE,blank=False,
         null=False,unique=False)
-    enrolled = models.BooleanField(default=True)
+    enrolled = models.BooleanField(default=False)
     
     class Meta:
         verbose_name_plural='Enroll_TW'

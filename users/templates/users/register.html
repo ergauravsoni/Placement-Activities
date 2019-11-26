@@ -2,18 +2,18 @@
 {% load bootstrap3 %}
 
 {%  block header %}
-    <h2 class='animated 1 fadeInUp delay-1s'>Registration of new account.</h2>
+    <h2 class='animated 1 fadeInUp delay-0s'>Registration of new account.</h2>
 {% endblock header %}
 
 {% block content %}
   
-  <form method="post" action="{% url 'users:register' %}" class="form animated 1 fadeIn delay-2s">
+  <form method="post" action="{% url 'users:register' %}" class="form animated 1 fadeIn delay-1s">
     
 		{% csrf_token %}
     {% bootstrap_form form %}
     
 		{% buttons %}
-			<button name="submit" class="btn btn-primary animated 1 bounceIn delay-3s">Create New Account</button>
+			<button name="submit" class="btn btn-primary animated 1 bounceIn delay-2s">Create New Account</button>
     {% endbuttons %}
     
     <input type="hidden" name="next"

@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django import forms
+import psycopg2
+
 
 from .models import Trainings_Workshops,Enroll_TW
 from .forms import TWForm,EnrollTWForm
@@ -22,8 +24,17 @@ def trainings_workshops(request):
 @login_required
 def training_workshop(request,training_workshop_id):
     """Show about a single training_workshop"""
-    detail=Trainings_Workshops.objects.get(id=training_workshop_id)
-    context={'detail':detail} 
+    ps_connect=psycopg2.connect(user="admin",
+                                  password="rootadmin",
+                                  host="localhost",
+                                  port="5432",
+                                  database="pmt_act")
+    cursor=ps_connect.cursor()
+    detail=get_object_or_404(Trainings_Workshops,id=training_workshop_id)
+    count=cursor.callproc('"countEnrolledUsers"',(detail.id,))
+    result=cursor.fetchall()
+    cursor.close()
+    context={'detail':detail,'count':result[0][0]} 
     return render(request,'pmt_act/training_workshop.html',context)
 
 @login_required
