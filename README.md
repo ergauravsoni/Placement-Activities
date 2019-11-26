@@ -16,7 +16,7 @@ Steps to run the project in Windows:
 7. All the required dependencies can be viewed in requirements.txt.
   (For example: First you should install django package:- pip install django)
 8. After installing all the required modules issue migrations for creating database:
-  python manage.py makemigrations pmt_act
+  python manage.py makemigrations pmt_act;
   python manage.py migrate
 9. Check whether database is created in PgAdmin by refreshing.
 10. After the database is created you can run the server by issuing this command:
